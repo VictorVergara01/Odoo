@@ -83,31 +83,28 @@ Esta guía detalla el proceso completo para instalar **Odoo 16 Community Edition
    ```bash
    source venv/bin/activate
    ```
-
+   
 4. Instala las dependencias necesarias:
+   ```bash
+   sudo apt install -y libpq-dev python3-dev gcc
+   ```
+
+5. Instala las dependencias necesarias:
+   ```bash
+   pip install psycopg2-binary
+   ```
+   
+6. Instala las dependencias necesarias:
+   ```bash
+   sudo apt -y install wkhtmltopdf
+   ```
+   
+7. Instala las dependencias necesarias:
    ```bash
    pip install --upgrade pip setuptools wheel
    pip install -r requirements.txt
    ```
-
----
-
-### **5. Instalar wkhtmltopdf**
-1. Descarga wkhtmltopdf:
-   ```bash
-   wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_amd64.deb
-   ```
-
-2. Instala el paquete:
-   ```bash
-   sudo apt install ./wkhtmltox_0.12.6-1.bionic_amd64.deb -y
-   ```
-
-3. Verifica la instalación:
-   ```bash
-   wkhtmltopdf --version
-   ```
-
+   
 ---
 
 ### **6. Configurar Odoo**
