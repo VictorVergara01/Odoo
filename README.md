@@ -69,8 +69,12 @@ Esta guía detalla el proceso completo para instalar **Odoo 16 Community Edition
    ```bash
    cd /opt/odoo
    ```
-
 2. Crea un entorno virtual de Python:
+   ```bash
+   sudo apt install python3.12-venv
+   ```
+
+3. Crea un entorno virtual de Python:
    ```bash
    python3 -m venv venv
    ```
