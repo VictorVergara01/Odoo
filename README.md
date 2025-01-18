@@ -86,7 +86,7 @@ Esta guía detalla el proceso completo para instalar **Odoo 16 Community Edition
    
 4. Instala las dependencias necesarias:
    ```bash
-   sudo apt install -y libpq-dev python3-dev gcc
+   sudo apt install -y libldap2-dev libsasl2-dev libssl-dev python3-dev gcc
    ```
 
 5. Instala las dependencias necesarias:
