@@ -125,6 +125,7 @@ Esta guía detalla el proceso completo para instalar **Odoo 16 Community Edition
    db_password = tu_contraseña_segura
    logfile = /var/log/odoo.log
    xmlrpc_port = 8069
+   proxy_mode = True
    ```
 
 3. Guarda y cierra el archivo.
