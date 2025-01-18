@@ -1,3 +1,102 @@
+# Instalación de wkhtmltopdf en un Servidor con Ubuntu
+
+Este documento detalla los pasos realizados para instalar y configurar `wkhtmltopdf` en un servidor Ubuntu.
+
+---
+
+## **1. Descarga del Paquete Precompilado**
+Se utilizó un paquete precompilado de `wkhtmltopdf` compatible con la versión de Ubuntu utilizada en el servidor.
+
+1. Descarga el paquete:
+   ```bash
+   wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1/wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+   ```
+
+2. Instala el paquete:
+   ```bash
+   sudo apt install ./wkhtmltox_0.12.6.1-2.jammy_amd64.deb
+   ```
+
+   Durante la instalación, también se instalaron las dependencias necesarias, como `xfonts-75dpi`.
+
+3. Verifica la instalación ejecutando:
+   ```bash
+   wkhtmltopdf --version
+   ```
+   **Resultado esperado:**
+   ```
+   wkhtmltopdf 0.12.6.1 (with patched qt)
+   ```
+
+---
+
+## **2. Configuración en Odoo**
+Para que Odoo utilice `wkhtmltopdf`, se configuró la ruta del binario en el archivo de configuración de Odoo.
+
+1. Edita el archivo de configuración de Odoo:
+   ```bash
+   sudo nano /etc/odoo/odoo.conf
+   ```
+
+2. Agrega o modifica la siguiente línea:
+   ```ini
+   webkit_path = /usr/local/bin/wkhtmltopdf
+   ```
+
+3. Guarda los cambios y reinicia Odoo:
+   ```bash
+   sudo systemctl restart odoo
+   ```
+
+---
+
+## **3. Pruebas de Generación de PDFs**
+
+1. **Prueba directa con wkhtmltopdf**:
+   - Genera un archivo PDF desde una URL:
+     ```bash
+     wkhtmltopdf https://www.google.com test.pdf
+     ```
+   - Verifica que el archivo `test.pdf` se haya creado correctamente y sea legible.
+
+2. **Prueba desde Odoo**:
+   - Accede al módulo de **Facturación** o **Ventas**.
+   - Crea o abre una factura existente.
+   - Haz clic en **Imprimir** y selecciona el formato de PDF.
+   - Descarga el archivo y verifica que se genere correctamente, incluyendo el logo y los datos de la factura.
+
+---
+
+## **4. Resolución de Problemas**
+
+### **Problema: El binario no se encuentra**
+Si el comando `wkhtmltopdf` no funciona, localiza el binario:
+```bash
+find / -name wkhtmltopdf 2>/dev/null
+```
+
+Asegúrate de que el archivo esté en una ubicación accesible como `/usr/local/bin`. Si no, reinstala el paquete o agrega la ruta al `PATH`.
+
+### **Problema: Error al generar PDFs en Odoo**
+- Verifica los registros de Odoo:
+  ```bash
+  sudo tail -f /var/log/odoo/odoo.log
+  ```
+- Confirma que el archivo de configuración de Odoo incluye la ruta correcta a `wkhtmltopdf`.
+- Asegúrate de que el logo y los recursos de la factura no excedan los límites de tamaño (generalmente 10 MB).
+
+---
+
+## **Notas Finales**
+
+- `wkhtmltopdf` es una herramienta esencial para generar informes PDF en Odoo. La versión utilizada, `0.12.6.1`, es compatible con las versiones modernas de Odoo.
+- La configuración adecuada de la ruta del binario y la verificación de dependencias son claves para un funcionamiento óptimo.
+
+Si encuentras algún problema adicional, consulta la documentación oficial o busca soporte en la comunidad de Odoo.
+
+
+
+
 # **Guía para Instalar Odoo 16 Community Edition en una VPS**
 
 Esta guía detalla el proceso completo para instalar **Odoo 16 Community Edition** en una VPS basada en **Ubuntu 22.04 LTS** o **20.04 LTS**.
